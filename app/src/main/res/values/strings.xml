@@ -5,4 +5,9 @@
         <item>Item 2</item>
         <item>Item 3</item>
     </string-array>
+
+    <string-array name="sort_options">
+        <item>Sort by Name</item>
+        <item>Sort by Date</item>
+    </string-array>
 </resources>
