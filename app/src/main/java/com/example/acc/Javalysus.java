@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.*;
@@ -95,13 +94,6 @@ public class Javalysus extends AppCompatActivity {
         listViewItems.setOnItemClickListener((parent, view, position, id) -> {
             removeItem(position);
         });
-
-        // Set up Spinner for sorting options
-        Spinner sortSpinner = findViewById(R.id.sortSpinner);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.sort_options, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortSpinner.setAdapter(spinnerAdapter);
     }
 
     private void addItem() {
