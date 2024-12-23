@@ -47,7 +47,7 @@ public class User {
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_PHONE, phone);
         editor.apply();
-    }
+    }   
 
     // Load user data from SharedPreferences
     public static User loadFromLocalStorage(Context context) {

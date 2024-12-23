@@ -275,10 +275,10 @@ public class MainActivity2 extends AppCompatActivity {
             return;
         }
 
-        if (!validatePhoto()) {
+        /*  if (!validatePhoto()) {
             showAlert("Please take a photo before registering");
             return;
-        }
+        }*/
 
         saveUserCredentials();
         display();
@@ -289,7 +289,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private boolean areFieldsFilled() {
-        return !isEmpty(reguser) &&
+        /*return !isEmpty(reguser) &&
                 !isEmpty(regpassword) &&
                 !isEmpty(conpassword) &&
                 !isEmpty(fname) &&
@@ -300,7 +300,8 @@ public class MainActivity2 extends AppCompatActivity {
                 !isTextViewEmpty(dateEdt) && // Ensure the birthday field is not empty
                 gender.getCheckedRadioButtonId() != -1 &&
                 isAnyCheckboxChecked() &&
-                areSpinnersSelected();
+                areSpinnersSelected();*/
+        return true;
     }
 
     private boolean isEmpty(EditText editText) {
@@ -454,6 +455,17 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private void saveUserCredentials() {
+        // Create and save user object
+        User user = new User();
+        user.setUserId(reguser.getText().toString()); // Using username as userId
+        user.setName(fname.getText().toString() + " " + lname.getText().toString());
+        user.setEmail(email.getText().toString());
+        user.setPhone(contactNumber.getText().toString());
+        
+        // Save to User's SharedPreferences
+        user.saveToLocalStorage(this);
+
+        // Keep existing SharedPreferences for backward compatibility
         SharedPreferences sharedPreferences = getSharedPreferences("UserCredentials", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("username", reguser.getText().toString());
@@ -464,6 +476,7 @@ public class MainActivity2 extends AppCompatActivity {
         editor.apply();
 
         // Log the saved credentials for debugging
+        Log.d("MainActivity2", "Saved User Object: " + user.getName());
         Log.d("MainActivity2", "Saved username: " + reguser.getText().toString());
         Log.d("MainActivity2", "Saved password: " + regpassword.getText().toString());
         Log.d("MainActivity2", "Saved firstName: " + fname.getText().toString());

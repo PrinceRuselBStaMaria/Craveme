@@ -14,16 +14,16 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Username -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="17dp"
-            android:text="REGISTRATION PAGE"
+            android:text="field not req fix when fin"
             android:textAlignment="center"
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <!-- Username -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
