@@ -51,6 +51,9 @@ public class Javalysus extends AppCompatActivity {
         editTextItem.setVisibility(View.GONE);
         editTextPrice.setVisibility(View.GONE);
 
+        // Load saved items
+        loadSavedItems();
+
         // Handle Enter key press event for EditText
         editTextItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -132,12 +135,21 @@ public class Javalysus extends AppCompatActivity {
 
     private void removeItem(int position) {
         String item = itemList.get(position);
+        String itemName = item.substring(0, item.lastIndexOf(" - $"));
         String price = item.substring(item.lastIndexOf("$") + 1);
+        
+        // Remove from storage
+        List<Item> items = Item.loadItems(this);
+        items.removeIf(i -> i.getName().equals(itemName));
+        Item.saveItems(this, items);
+        
+        // Update UI
         totalPrice -= Double.parseDouble(price);
         itemList.remove(position);
         adapter.notifyDataSetChanged();
         updateTotalPrice();
-        Toast.makeText(Javalysus.this, "Item removed", Toast.LENGTH_SHORT).show();
+        
+        Toast.makeText(this, "Item removed", Toast.LENGTH_SHORT).show();
     }
 
     private void updateTotalPrice() {
@@ -156,5 +168,18 @@ public class Javalysus extends AppCompatActivity {
         if (imm != null) {
             imm.hideSoftInputFromWindow(editTextItem.getWindowToken(), 0);
         }
+    }
+
+    private void loadSavedItems() {
+        List<Item> savedItems = Item.loadItems(this);
+        Log.d("Javalysus", "Loading items: " + savedItems.size());
+        
+        for (Item item : savedItems) {
+            itemList.add(item.getName() + " - $" + item.getPrice());
+            totalPrice += item.getPrice();
+        }
+        
+        adapter.notifyDataSetChanged();
+        updateTotalPrice();
     }
 }
