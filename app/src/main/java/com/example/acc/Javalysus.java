@@ -2,6 +2,7 @@ package com.example.acc;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -12,12 +13,14 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.io.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Javalysus extends AppCompatActivity {
 
@@ -102,23 +105,37 @@ public class Javalysus extends AppCompatActivity {
     }
 
     private void addItem() {
-        String item = editTextItem.getText().toString();
-        String price = editTextPrice.getText().toString();
-        if (!item.isEmpty() && !price.isEmpty()) {
-            itemList.add(item + " - $" + price);
-            adapter.notifyDataSetChanged();
-            editTextItem.setText("");
-            editTextPrice.setText("");
-            editTextItem.setVisibility(View.GONE);
-            editTextPrice.setVisibility(View.GONE);
-            hideKeyboard();
-
-            // Update total price
-            totalPrice += Double.parseDouble(price);
-            updateTotalPrice();
-        } else {
-            Toast.makeText(Javalysus.this, "Please enter both item and price", Toast.LENGTH_SHORT).show();
+        String itemName = editTextItem.getText().toString();
+        String priceStr = editTextPrice.getText().toString();
+        
+        if (!itemName.isEmpty() && !priceStr.isEmpty()) {
+            try {
+                double price = Double.parseDouble(priceStr);
+                Item item = new Item(itemName, 1, price);
+                
+                List<Item> items = Item.loadItems(this);
+                items.add(item);
+                Item.saveItems(this, items);
+                
+                updateUI(itemName, price);
+                
+                Log.d("Javalysus", "Item saved: " + item);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Invalid price format", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private void updateUI(String itemName, double price) {
+        itemList.add(itemName + " - $" + price);
+        adapter.notifyDataSetChanged();
+        editTextItem.setText("");
+        editTextPrice.setText("");
+        editTextItem.setVisibility(View.GONE);
+        editTextPrice.setVisibility(View.GONE);
+        hideKeyboard();
+        totalPrice += price;
+        updateTotalPrice();
     }
 
     private void removeItem(int position) {
