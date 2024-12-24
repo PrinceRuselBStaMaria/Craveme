@@ -33,7 +33,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import java.io.File;    
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,11 +95,10 @@ public class MainActivity2 extends AppCompatActivity {
             reguser = findViewById(R.id.reguser);
             fname = findViewById(R.id.fname);
             email = findViewById(R.id.email);
-            otherGenderEditText = findViewById(R.id.otherGenderEditText);
             capturedImage = findViewById(R.id.capturedImage);
             openCameraButton = findViewById(R.id.openCameraButton);
             filePickerButton = findViewById(R.id.file);
-            
+
             filePickerButton.setOnClickListener(v -> openFilePicker());
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,10 +178,10 @@ public class MainActivity2 extends AppCompatActivity {
 
     private boolean areFieldsFilled() {
         return !isEmpty(reguser) &&
-               !isEmpty(regpassword) &&
-               !isEmpty(conpassword) &&
-               !isEmpty(fname) &&
-               !isEmpty(email);
+                !isEmpty(regpassword) &&
+                !isEmpty(conpassword) &&
+                !isEmpty(fname) &&
+                !isEmpty(email);
     }
 
     private boolean isEmpty(EditText editText) {
@@ -245,7 +244,7 @@ public class MainActivity2 extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(       
+        File image = File.createTempFile(
                 imageFileName,
                 ".jpg",
                 storageDir
@@ -300,19 +299,19 @@ public class MainActivity2 extends AppCompatActivity {
     private void saveUserCredentials() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserCredentials", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        
+
         // Save user details
         editor.putString("username", reguser.getText().toString());
         editor.putString("password", regpassword.getText().toString());
         editor.putString("firstName", fname.getText().toString());
         editor.putString("email", email.getText().toString());
-        
+
         // Save image path with logging
         if (currentPhotoPath != null && !currentPhotoPath.isEmpty()) {
             editor.putString("profileImage", currentPhotoPath);
             Log.d("MainActivity2", "Saving image path: " + currentPhotoPath);
         }
-        
+
         editor.apply();
     }
 }

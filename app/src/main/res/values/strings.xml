@@ -15,12 +15,4 @@
         <font color="#666666">Not a member?</font> <font color="#006FFD">Register now</font>
     </string>
 
-    <string name="terms_and_conditions_text">
-    <font color='#666666'>I've read and agree with the </font>
-    <font color='#006FFD'>Terms and Conditions</font>
-    <font color='#666666'> and the </font>
-    <font color='#006FFD'>Privacy Policy</font>.
-</string>
-
-
 </resources>

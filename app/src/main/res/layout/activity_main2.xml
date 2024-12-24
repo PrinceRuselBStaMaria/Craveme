@@ -63,7 +63,7 @@
             android:textColor="#000000"/>
 
         <EditText
-            android:id="@+id/filePickerButton"
+            android:id="@+id/bday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Select your birthday"
@@ -107,31 +107,42 @@
             android:id="@+id/regpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Create a password"
             android:background="@drawable/edittext_background"
+            android:hint="Create a password"
             android:inputType="textPassword"
-            android:padding="10dp"/>
+            android:padding="13dp" />
 
         <EditText
-            android:id="@+id/conpassword"
+            android:id="@+id/conpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirm your password"
             android:background="@drawable/edittext_background"
             android:inputType="textPassword"
             android:layout_marginTop="16dp"
-            android:padding="10dp"/>
+            android:padding="13dp"/>
 
-        <!-- Profile Picture Upload Buttons -->
+        <!-- Profile Pic (Optional) Section -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Profile Picture"
-            android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:textColor="#000000"/>
+            android:gravity="center"
+            android:textSize="15sp"
+            android:layout_marginTop="16dp" />
 
+        <ImageView
+            android:id="@+id/capturedImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Captured Image"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:visibility="gone" />
+
+        <!-- Profile Picture Upload Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +151,7 @@
             android:weightSum="2">
 
             <Button
-                android:id="@+id/capturedImage"
+                android:id="@+id/openCameraButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Open Camera"
@@ -149,7 +160,7 @@
                 android:layout_marginEnd="8dp"/>
 
             <Button
-                android:id="@+id/currentPhotoPath"
+                android:id="@+id/file"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Pick from File"
@@ -159,17 +170,33 @@
         </LinearLayout>
 
         <!-- Terms and Conditions Checkbox -->
-        <CheckBox
-            android:id="@+id/cb_terms"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/terms_and_conditions_text"
-            android:layout_marginTop="16dp"
-            android:textColor="#000000"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <CheckBox
+                android:id="@+id/termsCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="3dp" />
+
+            <TextView
+                android:id="@+id/termsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I agree to the Terms and Conditions and Privacy Policy."
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000"/>
+
+        </LinearLayout>
 
         <!-- Login Button -->
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/regbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
