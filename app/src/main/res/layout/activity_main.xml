@@ -77,9 +77,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Not a member? Register now"
-            android:textColor="#006FFD"
             android:textSize="15sp"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:textColor="#006FFD"
+            android:text="@string/register_text"
+            android:autoLink="none" />
+
     </LinearLayout>
 </ScrollView>

@@ -1,6 +1,7 @@
 package com.example.acc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class Javalysus extends AppCompatActivity {
     private FloatingActionButton fab;
     private TextView totalPriceTextView;
     private double totalPrice = 0.0;
+    private Button to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class Javalysus extends AppCompatActivity {
         listViewItems = findViewById(R.id.listViewItems);
         fab = findViewById(R.id.fab);
         totalPriceTextView = findViewById(R.id.totalPrice);
+        to = findViewById(R.id.doneButton);
 
         itemList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
@@ -96,6 +100,12 @@ public class Javalysus extends AppCompatActivity {
 
         listViewItems.setOnItemClickListener((parent, view, position, id) -> {
             removeItem(position);
+        });
+
+        to = findViewById(R.id.doneButton);
+        to.setOnClickListener(v -> {
+            Intent intent = new Intent(Javalysus.this, UserProfileActivity.class);
+            startActivity(intent);
         });
     }
 

@@ -300,10 +300,19 @@ public class MainActivity2 extends AppCompatActivity {
     private void saveUserCredentials() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserCredentials", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        
+        // Save user details
         editor.putString("username", reguser.getText().toString());
         editor.putString("password", regpassword.getText().toString());
-        editor.putString("firstName", fname.getText().toString()); // Save first name
-        editor.putString("photoPath", currentPhotoPath);
+        editor.putString("firstName", fname.getText().toString());
+        editor.putString("email", email.getText().toString());
+        
+        // Save image path with logging
+        if (currentPhotoPath != null && !currentPhotoPath.isEmpty()) {
+            editor.putString("profileImage", currentPhotoPath);
+            Log.d("MainActivity2", "Saving image path: " + currentPhotoPath);
+        }
+        
         editor.apply();
     }
 }

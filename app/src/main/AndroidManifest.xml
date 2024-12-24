@@ -17,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Acc">
-
+        <activity
+            android:name=".UserProfileActivity"
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -27,11 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".CalculatorNiShane"
             android:exported="true" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true" />
@@ -44,6 +44,7 @@
         <activity
             android:name=".MainActivity2"
             android:exported="true" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
