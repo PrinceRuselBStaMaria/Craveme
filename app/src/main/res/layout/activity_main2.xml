@@ -1,172 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".MainActivity2">
+    android:background="#FFFFFF"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Username -->
+        <!-- Name Label and Field -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="17dp"
-            android:text="field not req fix when fin"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/reguser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter username"
-            android:inputType="text" />
-
-        <!-- Password -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/regpassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter password"
-            android:inputType="textPassword" />
-
-        <!-- Confirm Password -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Confirm Password"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/conpass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirm password"
-            android:inputType="textPassword" />
-
-        <!-- Name Fields -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="First Name"
-            android:textSize="15sp" />
+            android:text="Name"
+            android:textStyle="bold"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:layout_marginTop="1dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:id="@+id/fname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter first name"
-            android:inputType="textPersonName" />
+            android:hint="Enter your name"
+            android:background="@drawable/edittext_background"
+            android:inputType="textPersonName"
+            android:padding="12dp"/>
 
-        <!-- ImageView for displaying the captured image -->
+        <!-- Username Label and Field -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Profile Pic(optional)"
-            android:gravity="center"
-            android:textSize="15sp" />
+            android:text="Username"
+            android:textSize="15sp"
+            android:padding="3dp"
+            android:textStyle="bold"
+            android:layout_marginTop="1dp"
+            android:textColor="#000000"/>
 
-        <ImageView
-            android:id="@+id/capturedImage"
+        <EditText
+            android:id="@+id/reguser"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="Captured Image"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:visibility="gone" />
-
-        <!-- Button to open the camera -->
-
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center" >
-            <Button
-                android:id="@+id/openCameraButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Open Camera"
-                android:layout_weight="1"/>
+            android:hint="Enter your username"
+            android:background="@drawable/edittext_background"
+            android:inputType="textPersonName"
+            android:padding="12dp"/>
 
-            <Button
-                android:id="@+id/file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Pick from file"
-                android:layout_weight="@integer/material_motion_duration_long_1"/>
+        <!-- Birthday Select Date -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Birthday"
+            android:textSize="15sp"
+            android:padding="3dp"
+            android:textStyle="bold"
+            android:layout_marginTop="1dp"
+            android:textColor="#000000"/>
 
-        </LinearLayout>
+        <EditText
+            android:id="@+id/filePickerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select your birthday"
+            android:background="@drawable/edittext_background"
+            android:focusable="false"
+            android:clickable="true"
+            android:padding="12dp"/>
 
-
-
-        <!-- Email -->
+        <!-- Email Label and Field -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Email Address"
-            android:textSize="15sp" />
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter email address"
-            android:inputType="textEmailAddress" />
+            android:hint="name@email.com"
+            android:background="@drawable/edittext_background"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"/>
 
-        <!-- Birthday -->
+        <!-- Password Label and Field -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Birthday"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/bday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:hint="Select date"
-            android:padding="8dp"
-            android:textColor="#8d8a8d" />
+            android:text="Password"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000"/>
 
         <EditText
-            android:id="@+id/otherGenderEditText"
+            android:id="@+id/regpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Specify other gender"
-            android:visibility="gone" />
+            android:hint="Create a password"
+            android:background="@drawable/edittext_background"
+            android:inputType="textPassword"
+            android:padding="10dp"/>
 
-        <Button
-            android:id="@+id/regbutton"
+        <EditText
+            android:id="@+id/conpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Confirm your password"
+            android:background="@drawable/edittext_background"
+            android:inputType="textPassword"
             android:layout_marginTop="16dp"
-            android:text="Submit" />
+            android:padding="10dp"/>
+
+        <!-- Profile Picture Upload Buttons -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile Picture"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/capturedImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Open Camera"
+                android:backgroundTint="#666666"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/currentPhotoPath"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pick from File"
+                android:backgroundTint="#666666"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Terms and Conditions Checkbox -->
+        <CheckBox
+            android:id="@+id/cb_terms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_and_conditions_text"
+            android:layout_marginTop="16dp"
+            android:textColor="#000000"/>
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:backgroundTint="#006FFD"
+            android:layout_marginTop="1dp"/>
+
     </LinearLayout>
 </ScrollView>

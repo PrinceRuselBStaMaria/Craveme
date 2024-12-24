@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Acc</string>
+    <string name="app_name" translatable="false">Acc</string>
     <string-array name="spinner_items">
         <item>Item 1</item>
         <item>Item 2</item>
@@ -11,7 +11,16 @@
         <item>Sort by Date</item>
     </string-array>
 
-    <string name="register_text">
+    <string name="register_text" translatable="false">
         <font color="#666666">Not a member?</font> <font color="#006FFD">Register now</font>
     </string>
+
+    <string name="terms_and_conditions_text">
+    <font color='#666666'>I've read and agree with the </font>
+    <font color='#006FFD'>Terms and Conditions</font>
+    <font color='#666666'> and the </font>
+    <font color='#006FFD'>Privacy Policy</font>.
+</string>
+
+
 </resources>
