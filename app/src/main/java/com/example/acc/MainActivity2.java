@@ -209,9 +209,11 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private void navigateToMenu() {
-        Intent intent = new Intent(MainActivity2.this, MainActivity.class); // Assuming MainActivity is the menu activity
+        // Update to pass name to MainActivity3
+        Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+        intent.putExtra("fullName", fname.getText().toString());
         startActivity(intent);
-        finish(); // Close the current activity
+        finish();
     }
 
     private void openCamera() {
@@ -296,18 +298,11 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private void saveUserCredentials() {
-        User user = new User();
-        user.setUserId(reguser.getText().toString());
-        user.setName(fname.getText().toString());
-        user.setEmail(email.getText().toString());
-        
-        user.saveToLocalStorage(this);
-
         SharedPreferences sharedPreferences = getSharedPreferences("UserCredentials", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("username", reguser.getText().toString());
         editor.putString("password", regpassword.getText().toString());
-        editor.putString("firstName", fname.getText().toString());
+        editor.putString("firstName", fname.getText().toString()); // Save first name
         editor.putString("photoPath", currentPhotoPath);
         editor.apply();
     }
