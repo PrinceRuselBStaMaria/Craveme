@@ -108,4 +108,6 @@ public class MainActivity extends AppCompatActivity {
     private void handleSocialLogin(String provider) {
         Toast.makeText(this, provider + " login coming soon", Toast.LENGTH_SHORT).show();
     }
+
+
 }

@@ -10,4 +10,8 @@
         <item>Sort by Name</item>
         <item>Sort by Date</item>
     </string-array>
+
+    <string name="register_text">
+        <font color="#666666">Not a member?</font> <font color="#006FFD">Register now</font>
+    </string>
 </resources>
