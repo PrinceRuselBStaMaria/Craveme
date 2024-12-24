@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/logoImage"
             android:layout_width="300dp"
-            android:layout_height="180dp"
+            android:layout_height="260dp"
             android:layout_marginTop="50dp"
             android:contentDescription="Logo"
             android:src="@drawable/logo" />
@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email Address"
+            android:background="@drawable/edittext_background"
             android:inputType="textEmailAddress"
             android:layout_marginTop="16dp"
             android:padding="12dp" />
@@ -44,6 +45,7 @@
             android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
             android:hint="Password"
             android:inputType="textPassword"
             android:layout_marginTop="16dp"
