@@ -6,46 +6,48 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.acc.MainActivity;
 import com.example.acc.R;
 
-    public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_splash);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
 
-            ImageView logo = findViewById(R.id.logo);
+        ImageView logo = findViewById(R.id.logo);
 
-            Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-            Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
-            logo.startAnimation(fadeIn);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
-            fadeOut.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                    
-                }
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
 
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+            @Override   
+            public void onAnimationEnd(Animation animation) {
+                logo.setVisibility(View.INVISIBLE);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
 
-                @Override
-                public void onAnimationRepeat(Animation animation) {}
-            });
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
 
-            logo.startAnimation(fadeIn);
+        // Start fade in immediately
+        logo.startAnimation(fadeIn);
 
-            new Handler().postDelayed(() -> {
-                logo.startAnimation(fadeOut);
-            }, 2000); // 2 seconds for fade in
-        }
+        // Schedule fade out after fade in
+        new Handler().postDelayed(() -> {
+            logo.startAnimation(fadeOut);
+        }, 2000);
     }
+}
