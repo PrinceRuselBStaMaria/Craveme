@@ -29,7 +29,8 @@
             android:hint="Enter your name"
             android:background="@drawable/edittext_background"
             android:inputType="textPersonName"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"/>
 
         <!-- Username Label and Field -->
         <TextView
@@ -49,7 +50,8 @@
             android:hint="Enter your username"
             android:background="@drawable/edittext_background"
             android:inputType="textPersonName"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"/>
 
         <!-- Birthday Select Date -->
         <TextView
@@ -70,7 +72,8 @@
             android:background="@drawable/edittext_background"
             android:focusable="false"
             android:clickable="true"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"/>
 
         <!-- Email Label and Field -->
         <TextView
@@ -90,7 +93,8 @@
             android:hint="name@email.com"
             android:background="@drawable/edittext_background"
             android:inputType="textEmailAddress"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:textColor="@color/black"/>
 
         <!-- Password Label and Field -->
         <TextView
@@ -110,7 +114,8 @@
             android:background="@drawable/edittext_background"
             android:hint="Create a password"
             android:inputType="textPassword"
-            android:padding="13dp" />
+            android:padding="13dp"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/conpass"
@@ -120,7 +125,8 @@
             android:background="@drawable/edittext_background"
             android:inputType="textPassword"
             android:layout_marginTop="16dp"
-            android:padding="13dp"/>
+            android:padding="13dp"
+            android:textColor="@color/black"/>
 
         <!-- Profile Pic (Optional) Section -->
         <TextView

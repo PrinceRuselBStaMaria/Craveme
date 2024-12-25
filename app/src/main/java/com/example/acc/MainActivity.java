@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserCredentials", Context.MODE_PRIVATE);
-        String savedUsername = sharedPreferences.getString("username", null);
+        String savedUsername = sharedPreferences.getString("email", null);
         String savedPassword = sharedPreferences.getString("password", null);
         String firstName = sharedPreferences.getString("firstName", "");
 
