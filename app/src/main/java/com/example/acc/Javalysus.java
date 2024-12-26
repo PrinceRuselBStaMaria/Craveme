@@ -115,7 +115,7 @@ public class Javalysus extends AppCompatActivity {
         });
 
         acc.setOnClickListener(v -> {
-            Intent intent = new Intent(Javalysus.this, CalculatorNiShane.class);
+            Intent intent = new Intent(Javalysus.this, UserProfileActivity.class);
             startActivity(intent);
         });
 
