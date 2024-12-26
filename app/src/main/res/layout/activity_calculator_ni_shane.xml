@@ -8,7 +8,6 @@
     tools:context=".CalculatorNiShane">
 
     <!-- Navigation Buttons -->
-
     <Button
         android:id="@+id/backToMainMenuButton"
         android:layout_width="wrap_content"
@@ -24,13 +23,12 @@
         android:id="@+id/backToUserActivityButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User  "
+        android:text="User"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp" />
 
     <!-- Top Section: Budget Tracker -->
-
     <TextView
         android:id="@+id/budgetText"
         android:layout_width="wrap_content"
@@ -57,11 +55,10 @@
         android:id="@+id/budgetProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:progress="0"
         android:max="1000"
         android:progressTint="@color/teal"
-        android:progressDrawable="@drawable/progress_bar"
         app:layout_constraintTop_toBottomOf="@id/budgetSpinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +66,6 @@
         android:layout_marginHorizontal="16dp" />
 
     <!-- Middle Section: Daily Login System -->
-
     <TextView
         android:id="@+id/loginStreakText"
         android:layout_width="wrap_content"
@@ -88,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Today's Reward: +50 Points"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/loginStreakText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +103,6 @@
         app:layout_constraintTop_toBottomOf="@id/todaysRewardText" />
 
     <!-- Bottom Section: Rewards System -->
-
     <TextView
         android:id="@+id/rewardPointsText"
         android:layout_width="wrap_content"

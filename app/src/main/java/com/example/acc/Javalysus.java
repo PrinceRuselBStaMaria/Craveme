@@ -34,7 +34,9 @@ public class Javalysus extends AppCompatActivity {
     private List<Item> items;
     private FloatingActionButton fab;
     private TextView totalPriceTextView;
+    private TextView budgetTextView; // Added field for the budget display
     private double totalPrice = 0.0;
+    private double budget = 0.0; // Add field for the budget limit
     private Button to;
     private ImageButton acc;
     private View overlay;
@@ -52,6 +54,7 @@ public class Javalysus extends AppCompatActivity {
         listViewItems = findViewById(R.id.listViewItems);
         fab = findViewById(R.id.fab);
         totalPriceTextView = findViewById(R.id.totalPrice);
+        budgetTextView = findViewById(R.id.budgetText); // Initialize budget TextView
         to = findViewById(R.id.lipat);
         acc = findViewById(R.id.doneButton);
         overlay = findViewById(R.id.overlay);
@@ -134,7 +137,7 @@ public class Javalysus extends AppCompatActivity {
         if (!itemName.isEmpty() && !priceStr.isEmpty()) {
             try {
                 double price = Double.parseDouble(priceStr);
-                
+
                 if (editingPosition != -1) {
                     // Update existing item
                     Item item = items.get(editingPosition);
@@ -148,16 +151,17 @@ public class Javalysus extends AppCompatActivity {
                     items.add(item);
                     totalPrice += price;
                 }
-                
+
                 // Immediate UI updates
                 adapter.clear();
                 adapter.addAll(items);
                 adapter.notifyDataSetChanged();
                 updateTotalPrice();
-                
+                updateBudgetDisplay(); // Update the budget display
+
                 // Save changes
                 Item.saveItems(this, items);
-                
+
                 // Reset UI state
                 editTextItem.setText("");
                 editTextPrice.setText("");
@@ -166,7 +170,7 @@ public class Javalysus extends AppCompatActivity {
                 overlay.setVisibility(View.GONE);
                 hideKeyboard();
                 editingPosition = -1;
-                
+
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Invalid price format", Toast.LENGTH_SHORT).show();
             }
@@ -178,7 +182,7 @@ public class Javalysus extends AppCompatActivity {
         adapter.clear();
         adapter.addAll(items);
         adapter.notifyDataSetChanged();
-        
+
         editTextItem.setText("");
         editTextPrice.setText("");
         editTextItem.setVisibility(View.GONE);
@@ -215,6 +219,7 @@ public class Javalysus extends AppCompatActivity {
         Item.saveItems(this, items);
         adapter.notifyDataSetChanged();
         updateTotalPrice();
+        updateBudgetDisplay(); // Update budget display
     }
 
     public void removeItemAndRefresh(int position) {
@@ -222,16 +227,21 @@ public class Javalysus extends AppCompatActivity {
         totalPrice -= item.getPrice();
         items.remove(position);
         Item.saveItems(this, items);
-        
+
         adapter.remove(item);
         adapter.notifyDataSetChanged();
         updateTotalPrice();
-        
+        updateBudgetDisplay(); // Update budget display
+
         Toast.makeText(this, "Item deleted", Toast.LENGTH_SHORT).show();
     }
 
     private void updateTotalPrice() {
         totalPriceTextView.setText(String.format("Total: ₱%.2f", totalPrice));
+    }
+
+    private void updateBudgetDisplay() {
+        budgetTextView.setText(String.format("Budget: ₱%.2f", budget));
     }
 
     private void showKeyboard(View view) {
@@ -259,13 +269,14 @@ public class Javalysus extends AppCompatActivity {
         items = Item.loadItems(this);
         adapter.clear();
         adapter.addAll(items);
-        
+
         totalPrice = 0;
         for (Item item : items) {
             totalPrice += item.getPrice();
         }
-        
+
         updateTotalPrice();
+        updateBudgetDisplay(); // Update budget display
     }
 
     // Add method to handle checkbox changes
@@ -274,7 +285,7 @@ public class Javalysus extends AppCompatActivity {
         item.setChecked(isChecked);
         adapter.notifyDataSetChanged();
         Item.saveItems(this, items);
-        
+
         // Optional: Show feedback
         String status = isChecked ? "completed" : "pending";
         Toast.makeText(this, "Item marked as " + status, Toast.LENGTH_SHORT).show();
@@ -288,9 +299,5 @@ public class Javalysus extends AppCompatActivity {
             // Optional: Show feedback
             Toast.makeText(this, "Item marked as completed", Toast.LENGTH_SHORT).show();
         }
-
     }
-
-
 }
-
