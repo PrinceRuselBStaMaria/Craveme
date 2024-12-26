@@ -1,5 +1,6 @@
 package com.example.acc;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +36,10 @@ public class Javalysus extends AppCompatActivity {
     private TextView totalPriceTextView;
     private double totalPrice = 0.0;
     private Button to;
+    private ImageButton acc;
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +50,8 @@ public class Javalysus extends AppCompatActivity {
         listViewItems = findViewById(R.id.listViewItems);
         fab = findViewById(R.id.fab);
         totalPriceTextView = findViewById(R.id.totalPrice);
-        to = findViewById(R.id.doneButton);
-
+        to = findViewById(R.id.lipat);
+        acc = findViewById(R.id.doneButton);
         itemList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
         listViewItems.setAdapter(adapter);
@@ -85,7 +90,7 @@ public class Javalysus extends AppCompatActivity {
         });
 
         // Handle FloatingActionButton click event
-        fab.setOnClickListener(new View.OnClickListener() {
+        to.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editTextItem.getVisibility() == View.GONE) {
@@ -105,14 +110,12 @@ public class Javalysus extends AppCompatActivity {
             removeItem(position);
         });
 
-        to = findViewById(R.id.doneButton);
-        to.setOnClickListener(v -> {
-            Intent intent = new Intent(Javalysus.this, UserProfileActivity.class);
+        acc.setOnClickListener(v -> {
+            Intent intent = new Intent(Javalysus.this, CalculatorNiShane.class);
             startActivity(intent);
         });
 
-        to = findViewById(R.id.Tracker);
-        to.setOnClickListener(v -> {
+        fab.setOnClickListener(v -> {
             Intent intent = new Intent(Javalysus.this, CalculatorNiShane.class);
             startActivity(intent);
         });
