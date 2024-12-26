@@ -1,28 +1,12 @@
 package com.example.acc;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.TextView;
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.content.DialogInterface; import android.content.Intent; import android.content.SharedPreferences; import android.os.Bundle; import android.view.View; import android.widget.AdapterView; import android.widget.ArrayAdapter; import android.widget.Button; import android.widget.ProgressBar; import android.widget.Spinner; import android.widget.TextView; import androidx.activity.EdgeToEdge; import androidx.appcompat.app.AlertDialog; import androidx.appcompat.app.AppCompatActivity; import androidx.core.graphics.Insets; import androidx.core.view.ViewCompat; import androidx.core.view.WindowInsetsCompat;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.text.SimpleDateFormat; import java.util.Calendar; import java.util.Date;
 
 public class CalculatorNiShane extends AppCompatActivity {
+
+
 
     private Button backToMainMenuButton;
     private Button backToUserActivityButton;
@@ -103,14 +87,21 @@ public class CalculatorNiShane extends AppCompatActivity {
 
         budgetText.setText("Budget: " + budget + " pesos");
         budgetProgressBar.setProgress(budget);
-        if (budgetConfirmed) {
-            budgetSpinner.setVisibility(View.GONE);
-        } else {
+        if (budget <= 0) {
+
+            sharedPreferences.edit().putBoolean(KEY_BUDGET_CONFIRMED, false).apply();
             budgetSpinner.setVisibility(View.VISIBLE);
+
+        } else {
+            if (budgetConfirmed) {
+                budgetSpinner.setVisibility(View.GONE);
+            } else {
+                budgetSpinner.setVisibility(View.VISIBLE);
+            }
         }
 
 
-        String[] budgetOptions = new String[]{"Input a budget", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000"};
+        String[] budgetOptions = new String[]{"Input a budget", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, budgetOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         budgetSpinner.setAdapter(adapter);
@@ -229,6 +220,12 @@ public class CalculatorNiShane extends AppCompatActivity {
             Intent intent = new Intent(CalculatorNiShane.this, UserProfileActivity.class);
             startActivity(intent);
         });
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("itemPrice")) {
+            int itemPrice = intent.getIntExtra("itemPrice", 0);
+            updateBudget(itemPrice);
+        }
     }
 
 
@@ -308,5 +305,19 @@ public class CalculatorNiShane extends AppCompatActivity {
                 .setMessage(message)
                 .setPositiveButton("OK", null)
                 .show();
+    }
+
+    public void updateBudget(int amount) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        int currentBudget = sharedPreferences.getInt(KEY_BUDGET, 0);
+        int newBudget = currentBudget - amount;
+
+        // Update the budget in SharedPreferences
+        editor.putInt(KEY_BUDGET, newBudget);
+        editor.apply();
+
+        // Update the progress bar
+        budgetProgressBar.setProgress(newBudget);
+        budgetText.setText("Budget: " + newBudget + " pesos");
     }
 }

@@ -278,6 +278,19 @@ public class Javalysus extends AppCompatActivity {
         // Optional: Show feedback
         String status = isChecked ? "completed" : "pending";
         Toast.makeText(this, "Item marked as " + status, Toast.LENGTH_SHORT).show();
+
+        if (isChecked) {
+            int itemPrice = (int) item.getPrice(); // Assuming price is stored as double
+            Intent intent = new Intent(this, CalculatorNiShane.class);
+            intent.putExtra("itemPrice", itemPrice);
+            startActivity(intent);
+
+            // Optional: Show feedback
+            Toast.makeText(this, "Item marked as completed", Toast.LENGTH_SHORT).show();
+        }
+
     }
+
+
 }
 
