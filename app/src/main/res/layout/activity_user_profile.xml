@@ -10,45 +10,24 @@
     android:gravity="center_horizontal"
     tools:context=".UserProfileActivity">
 
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:contentDescription="Profile picture"/>
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/nameText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:textSize="20sp"
-        android:text="User Profile"
-        android:paddingTop="20dp"
-        android:textStyle="bold"
-        android:paddingBottom="15dp"/>
+        android:textSize="18sp"/>
 
-    <!--android:visibility="gone"-->
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:paddingBottom="20dp">
-
-        <ImageView
-            android:id="@+id/profileImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:contentDescription="Profile picture"
-            android:scaleType="centerCrop"
-            android:src="@drawable/logo" />
-
-        <TextView
-            android:id="@+id/nameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="textholder"
-            android:textSize="18sp" 
-            />
-
-    </LinearLayout>
-    
     <TextView
-        paddingTop="20dp"
         android:id="@+id/emailText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

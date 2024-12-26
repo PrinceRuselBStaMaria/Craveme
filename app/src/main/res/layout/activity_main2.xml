@@ -161,7 +161,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Open Camera"
-                android:backgroundTint="#006FFD"
+                android:backgroundTint="#666666"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"/>
 
@@ -170,7 +170,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Pick from File"
-                android:backgroundTint="#006FFD"
+                android:backgroundTint="#666666"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"/>
         </LinearLayout>
