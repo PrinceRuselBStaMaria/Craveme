@@ -38,8 +38,8 @@ public class Javalysus extends AppCompatActivity {
     private Button to;
     private ImageButton acc;
     private View overlay;
-    private List<String> itemList;
-
+    // Add field to track editing position
+    private int editingPosition = -1;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,7 +59,6 @@ public class Javalysus extends AppCompatActivity {
         adapter = new CustomAdapter(this, items);
         listViewItems.setAdapter(adapter);
 
-        itemList = new ArrayList<>();
         items = Item.loadItems(this);
 
         // Initially hide the EditText
@@ -129,6 +128,7 @@ public class Javalysus extends AppCompatActivity {
         });
     }
 
+    // Update addItem method to handle editing
     private void addItem() {
         String itemName = editTextItem.getText().toString();
         String priceStr = editTextPrice.getText().toString();
@@ -136,17 +136,34 @@ public class Javalysus extends AppCompatActivity {
         if (!itemName.isEmpty() && !priceStr.isEmpty()) {
             try {
                 double price = Double.parseDouble(priceStr);
-                Item item = new Item(itemName, 1, price);
-
-                List<Item> items = Item.loadItems(this);
-                items.add(item);
+                
+                if (editingPosition != -1) {
+                    // Update existing item
+                    Item item = items.get(editingPosition);
+                    totalPrice -= item.getPrice(); // Subtract old price
+                    item.setName(itemName);
+                    item.setPrice(price);
+                    totalPrice += price; // Add new price
+                    updateTotalPrice();
+                    adapter.notifyDataSetChanged();
+                    editingPosition = -1;
+                    hideInputFields();
+                    hideKeyboard();
+                } else {
+                    // Add new item
+                    Item item = new Item(itemName, 1, price);
+                    items.add(item);
+                    totalPrice += price;
+                    updateTotalPrice();
+                    adapter.notifyDataSetChanged();
+                    hideInputFields();
+                    hideKeyboard();
+                }
+                
                 Item.saveItems(this, items);
-
-                updateUI(itemName, price);
-
-                Log.d("Javalysus", "Item saved: " + item);
-                hideKeyboard();
-                hideInputFields();
+                editTextItem.setText("");
+                editTextPrice.setText("");
+                
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Invalid price format", Toast.LENGTH_SHORT).show();
             }
@@ -155,11 +172,10 @@ public class Javalysus extends AppCompatActivity {
 
     private void updateUI(String itemName, double price) {
         items = Item.loadItems(this);
-        itemList.clear();
-        for (Item item : items) {
-            itemList.add(item.getName() + " - ₱" + item.getPrice());
-        }
+        adapter.clear();
+        adapter.addAll(items);
         adapter.notifyDataSetChanged();
+        
         editTextItem.setText("");
         editTextPrice.setText("");
         editTextItem.setVisibility(View.GONE);
@@ -176,7 +192,9 @@ public class Javalysus extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    // Update editItem method
     public void editItem(int position) {
+        editingPosition = position;
         Item item = items.get(position);
         editTextItem.setText(item.getName());
         editTextPrice.setText(String.valueOf(item.getPrice()));
@@ -194,6 +212,19 @@ public class Javalysus extends AppCompatActivity {
         Item.saveItems(this, items);
         adapter.notifyDataSetChanged();
         updateTotalPrice();
+    }
+
+    public void removeItemAndRefresh(int position) {
+        Item item = items.get(position);
+        totalPrice -= item.getPrice();
+        items.remove(position);
+        Item.saveItems(this, items);
+        
+        adapter.remove(item);
+        adapter.notifyDataSetChanged();
+        updateTotalPrice();
+        
+        Toast.makeText(this, "Item deleted", Toast.LENGTH_SHORT).show();
     }
 
     private void updateTotalPrice() {
@@ -222,16 +253,28 @@ public class Javalysus extends AppCompatActivity {
     }
 
     private void loadSavedItems() {
-        List<Item> savedItems = Item.loadItems(this);
-        Log.d("Javalysus", "Loading items: " + savedItems.size());
-
-        for (Item item : savedItems) {
-            itemList.add(item.getName() + " - ₱" + item.getPrice());
+        items = Item.loadItems(this);
+        adapter.clear();
+        adapter.addAll(items);
+        
+        totalPrice = 0;
+        for (Item item : items) {
             totalPrice += item.getPrice();
         }
-
-        adapter.notifyDataSetChanged();
+        
         updateTotalPrice();
+    }
+
+    // Add method to handle checkbox changes
+    public void onItemChecked(int position, boolean isChecked) {
+        Item item = items.get(position);
+        item.setChecked(isChecked);
+        adapter.notifyDataSetChanged();
+        Item.saveItems(this, items);
+        
+        // Optional: Show feedback
+        String status = isChecked ? "completed" : "pending";
+        Toast.makeText(this, "Item marked as " + status, Toast.LENGTH_SHORT).show();
     }
 }
 
