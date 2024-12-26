@@ -37,6 +37,7 @@ public class Javalysus extends AppCompatActivity {
     private double totalPrice = 0.0;
     private Button to;
     private ImageButton acc;
+    private View overlay;
 
 
     @SuppressLint("MissingInflatedId")
@@ -52,6 +53,7 @@ public class Javalysus extends AppCompatActivity {
         totalPriceTextView = findViewById(R.id.totalPrice);
         to = findViewById(R.id.lipat);
         acc = findViewById(R.id.doneButton);
+        overlay = findViewById(R.id.overlay);
         itemList = new ArrayList<>();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
         listViewItems.setAdapter(adapter);
@@ -63,19 +65,19 @@ public class Javalysus extends AppCompatActivity {
         // Load saved items
         loadSavedItems();
 
-
-
+        // Add touch listener for overlay
+        overlay.setOnClickListener(v -> {
+            hideInputFields();
+            hideKeyboard();
+        });
 
         // Handle Enter key press event for EditText
-        editTextItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    addItem();
-                    return true;
-                }
-                return false;
+        editTextItem.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                editTextPrice.requestFocus();
+                return true;
             }
+            return false;
         });
 
         editTextPrice.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -94,11 +96,13 @@ public class Javalysus extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (editTextItem.getVisibility() == View.GONE) {
+                    overlay.setVisibility(View.VISIBLE);
                     editTextItem.setVisibility(View.VISIBLE);
                     editTextPrice.setVisibility(View.VISIBLE);
                     editTextItem.requestFocus();
                     showKeyboard(editTextItem);
                 } else {
+                    overlay.setVisibility(View.GONE);
                     editTextItem.setVisibility(View.GONE);
                     editTextPrice.setVisibility(View.GONE);
                     hideKeyboard();
@@ -137,6 +141,8 @@ public class Javalysus extends AppCompatActivity {
                 updateUI(itemName, price);
 
                 Log.d("Javalysus", "Item saved: " + item);
+                hideKeyboard();
+                hideInputFields();
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Invalid price format", Toast.LENGTH_SHORT).show();
             }
@@ -144,12 +150,13 @@ public class Javalysus extends AppCompatActivity {
     }
 
     private void updateUI(String itemName, double price) {
-        itemList.add(itemName + " - $" + price);
+        itemList.add(itemName + " - ₱" + price);
         adapter.notifyDataSetChanged();
         editTextItem.setText("");
         editTextPrice.setText("");
         editTextItem.setVisibility(View.GONE);
         editTextPrice.setVisibility(View.GONE);
+        overlay.setVisibility(View.GONE);
         hideKeyboard();
         totalPrice += price;
         updateTotalPrice();
@@ -157,8 +164,8 @@ public class Javalysus extends AppCompatActivity {
 
     private void removeItem(int position) {
         String item = itemList.get(position);
-        String itemName = item.substring(0, item.lastIndexOf(" - $"));
-        String price = item.substring(item.lastIndexOf("$") + 1);
+        String itemName = item.substring(0, item.lastIndexOf(" - ₱"));
+        String price = item.substring(item.lastIndexOf("₱") + 1);
 
         // Remove from storage
         List<Item> items = Item.loadItems(this);
@@ -175,7 +182,7 @@ public class Javalysus extends AppCompatActivity {
     }
 
     private void updateTotalPrice() {
-        totalPriceTextView.setText(String.format("Total: $%.2f", totalPrice));
+        totalPriceTextView.setText(String.format("Total: ₱%.2f", totalPrice));
     }
 
     private void showKeyboard(View view) {
@@ -187,9 +194,16 @@ public class Javalysus extends AppCompatActivity {
 
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(editTextItem.getWindowToken(), 0);
+        View currentFocus = getCurrentFocus();
+        if (currentFocus != null) {
+            imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
         }
+    }
+
+    private void hideInputFields() {
+        overlay.setVisibility(View.GONE);
+        editTextItem.setVisibility(View.GONE);
+        editTextPrice.setVisibility(View.GONE);
     }
 
     private void loadSavedItems() {
@@ -197,7 +211,7 @@ public class Javalysus extends AppCompatActivity {
         Log.d("Javalysus", "Loading items: " + savedItems.size());
 
         for (Item item : savedItems) {
-            itemList.add(item.getName() + " - $" + item.getPrice());
+            itemList.add(item.getName() + " - ₱" + item.getPrice());
             totalPrice += item.getPrice();
         }
 
