@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
 
-public class Item {
+public class Item implements Serializable {
     private String name;
     private int quantity;
     private double price;
     private String description;
+    private boolean checked;
     private static final String PREF_NAME = "ItemStorage";
     private static final String KEY_ITEMS = "items_list";
     private static final String FILENAME = "items.txt";
@@ -30,12 +31,14 @@ public class Item {
     public int getQuantity() { return quantity; }
     public double getPrice() { return price; }
     public String getDescription() { return description; }
+    public boolean isChecked() { return checked; }
 
     // Setters
     public void setName(String name) { this.name = name; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void setPrice(double price) { this.price = price; }
     public void setDescription(String description) { this.description = description; }
+    public void setChecked(boolean checked) { this.checked = checked; }
 
     // Save list of items
     public static void saveItems(Context context, List<Item> items) {

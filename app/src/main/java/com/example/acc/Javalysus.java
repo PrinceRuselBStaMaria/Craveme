@@ -30,14 +30,15 @@ public class Javalysus extends AppCompatActivity {
     private EditText editTextItem;
     private EditText editTextPrice;
     private ListView listViewItems;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> itemList;
+    private CustomAdapter adapter;
+    private List<Item> items;
     private FloatingActionButton fab;
     private TextView totalPriceTextView;
     private double totalPrice = 0.0;
     private Button to;
     private ImageButton acc;
     private View overlay;
+    private List<String> itemList;
 
 
     @SuppressLint("MissingInflatedId")
@@ -54,9 +55,12 @@ public class Javalysus extends AppCompatActivity {
         to = findViewById(R.id.lipat);
         acc = findViewById(R.id.doneButton);
         overlay = findViewById(R.id.overlay);
-        itemList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
+        items = Item.loadItems(this);
+        adapter = new CustomAdapter(this, items);
         listViewItems.setAdapter(adapter);
+
+        itemList = new ArrayList<>();
+        items = Item.loadItems(this);
 
         // Initially hide the EditText
         editTextItem.setVisibility(View.GONE);
@@ -150,7 +154,11 @@ public class Javalysus extends AppCompatActivity {
     }
 
     private void updateUI(String itemName, double price) {
-        itemList.add(itemName + " - ₱" + price);
+        items = Item.loadItems(this);
+        itemList.clear();
+        for (Item item : items) {
+            itemList.add(item.getName() + " - ₱" + item.getPrice());
+        }
         adapter.notifyDataSetChanged();
         editTextItem.setText("");
         editTextPrice.setText("");
@@ -162,23 +170,30 @@ public class Javalysus extends AppCompatActivity {
         updateTotalPrice();
     }
 
-    private void removeItem(int position) {
-        String item = itemList.get(position);
-        String itemName = item.substring(0, item.lastIndexOf(" - ₱"));
-        String price = item.substring(item.lastIndexOf("₱") + 1);
-
-        // Remove from storage
-        List<Item> items = Item.loadItems(this);
-        items.removeIf(i -> i.getName().equals(itemName));
+    public void updateItem(int position, Item item) {
+        items.set(position, item);
         Item.saveItems(this, items);
+        adapter.notifyDataSetChanged();
+    }
 
-        // Update UI
-        totalPrice -= Double.parseDouble(price);
-        itemList.remove(position);
+    public void editItem(int position) {
+        Item item = items.get(position);
+        editTextItem.setText(item.getName());
+        editTextPrice.setText(String.valueOf(item.getPrice()));
+        editTextItem.setVisibility(View.VISIBLE);
+        editTextPrice.setVisibility(View.VISIBLE);
+        overlay.setVisibility(View.VISIBLE);
+        editTextItem.requestFocus();
+        showKeyboard(editTextItem);
+    }
+
+    public void removeItem(int position) {
+        Item item = items.get(position);
+        totalPrice -= item.getPrice();
+        items.remove(position);
+        Item.saveItems(this, items);
         adapter.notifyDataSetChanged();
         updateTotalPrice();
-
-        Toast.makeText(this, "Item removed", Toast.LENGTH_SHORT).show();
     }
 
     private void updateTotalPrice() {
