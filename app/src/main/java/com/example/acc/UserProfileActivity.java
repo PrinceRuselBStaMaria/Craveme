@@ -21,7 +21,7 @@ import java.io.File;
 import android.util.Log;
 
 public class UserProfileActivity extends AppCompatActivity {
-    private TextView nameText, emailText, phoneText;
+    private TextView nameText, emailText, phoneText, passwordText, usernameText;
     private Button logoutButton;
     private ImageView profileImage;
 
@@ -39,7 +39,10 @@ public class UserProfileActivity extends AppCompatActivity {
         // Initialize views
         nameText = findViewById(R.id.nameText);
         emailText = findViewById(R.id.emailText);
-        phoneText = findViewById(R.id.phoneText);
+
+        passwordText = findViewById(R.id.passwordText);
+        usernameText = findViewById(R.id.usernameText);
+
         logoutButton = findViewById(R.id.logoutButton);
         profileImage = findViewById(R.id.profileImage);
 
@@ -56,11 +59,17 @@ public class UserProfileActivity extends AppCompatActivity {
         String name = prefs.getString("firstName", "Not set");
         String email = prefs.getString("email", "Not set");
         String imagePath = prefs.getString("profileImage", null);
+
+        String username = prefs.getString("username", "Not set");
+        String password = prefs.getString("password", "Not set");
         
         Log.d("UserProfile", "Retrieved image path: " + imagePath);
         
         nameText.setText("Name: " + name);
         emailText.setText("Email: " + email);
+        passwordText.setText("Password: " + password);
+        usernameText.setText("Username: " + username);
+
         
         if (imagePath != null && !imagePath.isEmpty()) {
             File imageFile = new File(imagePath);

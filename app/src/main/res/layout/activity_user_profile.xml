@@ -22,24 +22,52 @@
 
     <TextView
         android:id="@+id/nameText"
-        android:layout_width="match_parent"
+        android:layout_width="171dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:textSize="18sp"/>
+        android:textColor="#A9A9A9"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/emailText"
-        android:layout_width="match_parent"
+        android:layout_width="173dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:textSize="18sp"/>
+        android:textColor="#A9A9A9"
+        android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/phoneText"
-        android:layout_width="match_parent"
+        android:id="@+id/birthdayText"
+        android:layout_width="174dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:textSize="18sp"/>
+        android:layout_marginBottom="8dp"
+        android:textColor="#A9A9A9"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/usernameText"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/changeUsernameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Username"/>
+
+    <TextView
+        android:id="@+id/passwordText"
+        android:layout_width="172dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/changePasswordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"/>
 
     <Button
         android:id="@+id/logoutButton"
