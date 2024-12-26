@@ -13,6 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="4dp"
+        android:background="#88E788"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -47,8 +48,10 @@
         android:id="@+id/listViewItems"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#4a4a4a"
         android:divider="@drawable/divider"
         android:dividerHeight="12dp"
+        android:paddingTop="16dp"
         app:layout_constraintBottom_toTopOf="@id/totalPrice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
