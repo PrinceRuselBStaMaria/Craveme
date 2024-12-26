@@ -47,6 +47,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:elevation="6dp"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="@id/listViewItems"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:hoveredFocusedTranslationZ="12dp"
+        app:pressedTranslationZ="12dp" />
+
     <!-- Total Price TextView -->
     <TextView
         android:id="@+id/totalPrice"
@@ -55,10 +71,11 @@
         android:text="Total: $0.00"
         android:textSize="18sp"
         android:padding="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/listViewItems"
+        app:layout_constraintBottom_toTopOf="@id/editTextItem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/editTextItem" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- EditText for adding items -->
     <EditText
@@ -68,10 +85,9 @@
         android:hint="Enter Cravings"
         android:inputType="text"
         android:imeOptions="actionDone"
-        app:layout_constraintTop_toBottomOf="@id/totalPrice"
+        app:layout_constraintBottom_toTopOf="@id/editTextPrice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/editTextPrice"
         android:layout_margin="8dp" />
 
     <!-- EditText for adding price -->
@@ -82,25 +98,10 @@
         android:hint="Enter Price"
         android:inputType="numberDecimal"
         android:imeOptions="actionDone"
-        app:layout_constraintTop_toBottomOf="@id/editTextItem"
+        app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fab"
         android:layout_margin="8dp" />
-
-
-    <!-- Floating Action Button -->
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="40dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/button"
@@ -109,6 +110,7 @@
         android:layout_marginBottom="16dp"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="160dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
