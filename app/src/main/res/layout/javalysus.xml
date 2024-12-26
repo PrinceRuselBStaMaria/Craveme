@@ -40,17 +40,21 @@
     </androidx.appcompat.widget.Toolbar>
 
     <!-- ListView for Notes -->
+
+    <!-- Add this after ListView but before FAB -->
+
     <ListView
         android:id="@+id/listViewItems"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:divider="@drawable/divider"
+        android:dividerHeight="12dp"
         app:layout_constraintBottom_toTopOf="@id/totalPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <!-- Add this after ListView but before FAB -->
     <View
         android:id="@+id/overlay"
         android:layout_width="match_parent"
