@@ -58,6 +58,9 @@ public class Javalysus extends AppCompatActivity {
         // Load saved items
         loadSavedItems();
 
+
+
+
         // Handle Enter key press event for EditText
         editTextItem.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -107,23 +110,29 @@ public class Javalysus extends AppCompatActivity {
             Intent intent = new Intent(Javalysus.this, UserProfileActivity.class);
             startActivity(intent);
         });
+
+        to = findViewById(R.id.Tracker);
+        to.setOnClickListener(v -> {
+            Intent intent = new Intent(Javalysus.this, CalculatorNiShane.class);
+            startActivity(intent);
+        });
     }
 
     private void addItem() {
         String itemName = editTextItem.getText().toString();
         String priceStr = editTextPrice.getText().toString();
-        
+
         if (!itemName.isEmpty() && !priceStr.isEmpty()) {
             try {
                 double price = Double.parseDouble(priceStr);
                 Item item = new Item(itemName, 1, price);
-                
+
                 List<Item> items = Item.loadItems(this);
                 items.add(item);
                 Item.saveItems(this, items);
-                
+
                 updateUI(itemName, price);
-                
+
                 Log.d("Javalysus", "Item saved: " + item);
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Invalid price format", Toast.LENGTH_SHORT).show();
@@ -147,18 +156,18 @@ public class Javalysus extends AppCompatActivity {
         String item = itemList.get(position);
         String itemName = item.substring(0, item.lastIndexOf(" - $"));
         String price = item.substring(item.lastIndexOf("$") + 1);
-        
+
         // Remove from storage
         List<Item> items = Item.loadItems(this);
         items.removeIf(i -> i.getName().equals(itemName));
         Item.saveItems(this, items);
-        
+
         // Update UI
         totalPrice -= Double.parseDouble(price);
         itemList.remove(position);
         adapter.notifyDataSetChanged();
         updateTotalPrice();
-        
+
         Toast.makeText(this, "Item removed", Toast.LENGTH_SHORT).show();
     }
 
@@ -183,13 +192,14 @@ public class Javalysus extends AppCompatActivity {
     private void loadSavedItems() {
         List<Item> savedItems = Item.loadItems(this);
         Log.d("Javalysus", "Loading items: " + savedItems.size());
-        
+
         for (Item item : savedItems) {
             itemList.add(item.getName() + " - $" + item.getPrice());
             totalPrice += item.getPrice();
         }
-        
+
         adapter.notifyDataSetChanged();
         updateTotalPrice();
     }
 }
+

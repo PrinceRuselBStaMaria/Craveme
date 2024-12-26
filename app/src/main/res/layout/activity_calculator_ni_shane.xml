@@ -7,4 +7,129 @@
     android:layout_height="match_parent"
     tools:context=".CalculatorNiShane">
 
+    <!-- Navigation Buttons -->
+
+    <Button
+        android:id="@+id/backToMainMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="Main Menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/backToUserActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User  "
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- Top Section: Budget Tracker -->
+
+    <TextView
+        android:id="@+id/budgetText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="Budget: 0 pesos"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backToMainMenuButton" />
+
+    <Spinner
+        android:id="@+id/budgetSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/budgetText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/budgetProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:progress="0"
+        android:max="1000"
+        android:progressTint="@color/teal"
+        android:progressDrawable="@drawable/progress_bar"
+        app:layout_constraintTop_toBottomOf="@id/budgetSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp" />
+
+    <!-- Middle Section: Daily Login System -->
+
+    <TextView
+        android:id="@+id/loginStreakText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="Current Streak: Day 3"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/budgetProgressBar" />
+
+    <TextView
+        android:id="@+id/todaysRewardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today's Reward: +50 Points"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/loginStreakText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="106dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:text="Check In"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/todaysRewardText" />
+
+    <!-- Bottom Section: Rewards System -->
+
+    <TextView
+        android:id="@+id/rewardPointsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:text="Points: 150"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+
+    <TextView
+        android:id="@+id/nextRewardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Reward: 200 points for a Gold Badge!"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/rewardPointsText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
