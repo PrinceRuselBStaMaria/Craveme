@@ -59,8 +59,6 @@ public class Javalysus extends AppCompatActivity {
         adapter = new CustomAdapter(this, items);
         listViewItems.setAdapter(adapter);
 
-        items = Item.loadItems(this);
-
         // Initially hide the EditText
         editTextItem.setVisibility(View.GONE);
         editTextPrice.setVisibility(View.GONE);
@@ -140,29 +138,34 @@ public class Javalysus extends AppCompatActivity {
                 if (editingPosition != -1) {
                     // Update existing item
                     Item item = items.get(editingPosition);
-                    totalPrice -= item.getPrice(); // Subtract old price
+                    totalPrice -= item.getPrice();
                     item.setName(itemName);
                     item.setPrice(price);
-                    totalPrice += price; // Add new price
-                    updateTotalPrice();
-                    adapter.notifyDataSetChanged();
-                    editingPosition = -1;
-                    hideInputFields();
-                    hideKeyboard();
+                    totalPrice += price;
                 } else {
                     // Add new item
                     Item item = new Item(itemName, 1, price);
                     items.add(item);
                     totalPrice += price;
-                    updateTotalPrice();
-                    adapter.notifyDataSetChanged();
-                    hideInputFields();
-                    hideKeyboard();
                 }
                 
+                // Immediate UI updates
+                adapter.clear();
+                adapter.addAll(items);
+                adapter.notifyDataSetChanged();
+                updateTotalPrice();
+                
+                // Save changes
                 Item.saveItems(this, items);
+                
+                // Reset UI state
                 editTextItem.setText("");
                 editTextPrice.setText("");
+                editTextItem.setVisibility(View.GONE);
+                editTextPrice.setVisibility(View.GONE);
+                overlay.setVisibility(View.GONE);
+                hideKeyboard();
+                editingPosition = -1;
                 
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Invalid price format", Toast.LENGTH_SHORT).show();
