@@ -7,114 +7,100 @@
     android:layout_height="match_parent"
     tools:context=".CalculatorNiShane">
 
-    <!-- Navigation Buttons -->
-    <Button
-        android:id="@+id/backToMainMenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="92dp"
-        android:text="Main Menu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/backToUserActivityButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp" />
-
     <!-- Top Section: Budget Tracker -->
+
     <TextView
         android:id="@+id/budgetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="Budget: 0 pesos"
-        android:textSize="16sp"
+        android:layout_marginTop="36dp"
+        android:text="Budget: ₱ 0 "
+        android:textSize="40sp"
         android:textStyle="bold"
+        android:padding="12dp"
+        android:background="@drawable/textview_background"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backToMainMenuButton" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Middle Section -->
 
     <Spinner
         android:id="@+id/budgetSpinner"
-        android:layout_width="0dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/budgetText"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/budgetText" />
 
     <ProgressBar
         android:id="@+id/budgetProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:progress="0"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="4dp"
         android:max="1000"
+        android:progress="0"
         android:progressTint="@color/teal"
-        app:layout_constraintTop_toBottomOf="@id/budgetSpinner"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/budgetSpinner" />
 
-    <!-- Middle Section: Daily Login System -->
-    <TextView
-        android:id="@+id/loginStreakText"
-        android:layout_width="wrap_content"
+    <!-- Container for Streak and Reward Text -->
+    <LinearLayout
+        android:id="@+id/streakRewardContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="Current Streak: Day 3"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/textview_background"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/budgetProgressBar" />
+        app:layout_constraintTop_toBottomOf="@id/budgetProgressBar">
 
-    <TextView
-        android:id="@+id/todaysRewardText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Today's Reward: +50 Points"
-        android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/loginStreakText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:clickable="true"
-        android:focusable="true" />
+        <TextView
+            android:id="@+id/loginStreakText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Current Streak: Day 3"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="106dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="16dp"
-        android:text="Check In"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todaysRewardText" />
+        <TextView
+            android:id="@+id/todaysRewardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:text="Today's Reward: +50 Points"
+            android:textSize="20sp" />
+    </LinearLayout>
 
-    <!-- Bottom Section: Rewards System -->
     <TextView
         android:id="@+id/rewardPointsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="76dp"
         android:text="Points: 150"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@id/streakRewardContainer" />
 
     <TextView
         android:id="@+id/nextRewardText"
@@ -126,5 +112,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rewardPointsText" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#006FFD"
+        android:text="Check In"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nextRewardText" />
+
+    <Button
+        android:id="@+id/backToMainMenuButton"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="#006FFD"
+        android:text="Main Menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/budgetProgressBar" />
+
+    <Button
+        android:id="@+id/backToUserActivityButton"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="#006FFD"
+        android:text="Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/budgetProgressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
