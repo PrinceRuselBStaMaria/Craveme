@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Acc</string>
+    <string name="app_name">CraveMe</string>
     <string-array name="spinner_items">
         <item>Item 1</item>
         <item>Item 2</item>
