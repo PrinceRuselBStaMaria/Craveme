@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Budget: ₱ 0 "
-        android:textSize="40sp"
+        android:text="Budget: 0 pesos"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:padding="12dp"
         android:background="@drawable/textview_background"
@@ -52,18 +52,19 @@
         app:layout_constraintTop_toBottomOf="@id/budgetSpinner" />
 
     <!-- Container for Streak and Reward Text -->
+
     <LinearLayout
         android:id="@+id/streakRewardContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="124dp"
         android:background="@drawable/textview_background"
         android:elevation="8dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="30dp"
-        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/budgetProgressBar">
 
@@ -74,7 +75,7 @@
             android:gravity="center"
             android:padding="8dp"
             android:text="Current Streak: Day 3"
-            android:textSize="30sp"
+            android:textSize="23sp"
             android:textStyle="bold" />
 
         <TextView
@@ -83,8 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
-            android:padding="8dp"
             android:gravity="center"
+            android:padding="8dp"
             android:text="Today's Reward: +50 Points"
             android:textSize="20sp" />
     </LinearLayout>
@@ -93,7 +94,7 @@
         android:id="@+id/rewardPointsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="84dp"
         android:text="Points: 150"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -106,7 +107,7 @@
         android:id="@+id/nextRewardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:text="Next Reward: 200 points for a Gold Badge!"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +118,7 @@
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#006FFD"
         android:text="Check In"
         app:layout_constraintEnd_toEndOf="parent"
