@@ -10,12 +10,23 @@
     android:gravity="center_horizontal"
     tools:context=".UserProfileActivity">
 
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/back"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="start"
+        android:contentDescription="Back"/>
+
     <ImageView
         android:id="@+id/profileImage"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="60sp"
         android:scaleType="centerCrop"
         android:visibility="visible"
         android:background="@android:color/darker_gray"
@@ -23,49 +34,76 @@
 
     <TextView
         android:id="@+id/nameText"
-        android:layout_width="171dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:textColor="#A9A9A9"
-        android:textSize="18sp" />
+        android:layout_marginVertical="8dp"
+        android:gravity="start"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textSize="25sp"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/emailText"
-        android:layout_width="173dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:textColor="#A9A9A9"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/birthdayText"
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:textColor="#A9A9A9"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/usernameText"
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:textSize="18sp" />
-
-  
+        android:layout_marginVertical="8dp"
+        android:gravity="start"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textSize="25sp"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/passwordText"
-        android:layout_width="172dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp" />
+        android:layout_marginVertical="8dp"
+        android:gravity="start"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
 
-    git
+    <TextView
+        android:id="@+id/usernameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:gravity="start"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textSize="25sp"
+        android:textColor="@android:color/black"/>
+
+    <!-- Spacer to push button to bottom -->
+    <TextView
+        android:id="@+id/birthdayText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="start"
+        android:padding="16dp"
+        android:textAlignment="textStart"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/logoutButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"/>
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Logout"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="18sp"/>
 
 </LinearLayout>

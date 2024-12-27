@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ImageButton;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -21,9 +22,10 @@ import java.io.File;
 import android.util.Log;
 
 public class UserProfileActivity extends AppCompatActivity {
-    private TextView nameText, emailText, phoneText, passwordText, usernameText;
+    private TextView nameText, emailText, phoneText, passwordText, usernameText, birthdayText;
     private Button logoutButton;
     private ImageView profileImage;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class UserProfileActivity extends AppCompatActivity {
 
         passwordText = findViewById(R.id.passwordText);
         usernameText = findViewById(R.id.usernameText);
+        birthdayText = findViewById(R.id.birthdayText);
+        backButton = findViewById(R.id.back_button);
 
         logoutButton = findViewById(R.id.logoutButton);
         profileImage = findViewById(R.id.profileImage);
@@ -51,6 +55,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
         // Set up logout button
         logoutButton.setOnClickListener(v -> handleLogout());
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(UserProfileActivity.this, Javalysus.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void displayUserInfo() {
@@ -61,6 +70,7 @@ public class UserProfileActivity extends AppCompatActivity {
         String imagePath = prefs.getString("profileImage", null);
         String username = prefs.getString("username", "Not set");
         String password = prefs.getString("password", "Not set");
+        String birthday = prefs.getString("birthday", "Not set");
         
         Log.d("UserProfile", "Loading image from path: " + imagePath);
         
@@ -68,6 +78,7 @@ public class UserProfileActivity extends AppCompatActivity {
         emailText.setText("Email: " + email);
         passwordText.setText("Password: " + password);
         usernameText.setText("Username: " + username);
+        birthdayText.setText("Birthday: " + birthday);
 
         if (imagePath != null) {
             File imageFile = new File(imagePath);
