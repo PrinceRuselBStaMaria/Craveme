@@ -34,13 +34,16 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity {
-
+    private ImageView profileImage;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_CAMERA_PERMISSION = 200;
     private static final int REQUEST_PICK_IMAGE = 2;
@@ -61,6 +64,9 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        
+        profileImage = findViewById(R.id.profileImage);
+        capturedImage = findViewById(R.id.capturedImage);
 
         try {
             initializeViews();
@@ -280,6 +286,7 @@ public class MainActivity2 extends AppCompatActivity {
                     capturedImage.setImageBitmap(bitmap);
                     capturedImage.setVisibility(View.VISIBLE);
                     currentPhotoPath = getRealPathFromURI(selectedImageUri);
+                    handleImageSelection(selectedImageUri);
                 } catch (IOException e) {
                     e.printStackTrace();
                     Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
@@ -313,5 +320,47 @@ public class MainActivity2 extends AppCompatActivity {
         }
 
         editor.apply();
+    }
+
+    private void handleImageSelection(Uri selectedImageUri) {
+        try {
+            // Create directory in app's private storage
+            File imageDir = new File(getFilesDir(), "profile_images");
+            if (!imageDir.exists()) {
+                imageDir.mkdirs();
+            }
+
+            // Create new file with unique name
+            String timestamp = String.valueOf(System.currentTimeMillis());
+            File imageFile = new File(imageDir, "profile_" + timestamp + ".jpg");
+
+            // Copy image to app's private storage
+            try (InputStream in = getContentResolver().openInputStream(selectedImageUri);
+                 OutputStream out = new FileOutputStream(imageFile)) {
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+            }
+
+            // Save path to SharedPreferences
+            currentPhotoPath = imageFile.getAbsolutePath();
+            SharedPreferences.Editor editor = getSharedPreferences("UserCredentials", MODE_PRIVATE).edit();
+            editor.putString("profileImage", currentPhotoPath);
+            editor.apply();
+
+            // Update UI with new image
+            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+            if (bitmap != null) {
+                capturedImage.setImageBitmap(bitmap);
+                capturedImage.setVisibility(View.VISIBLE);
+                Log.d("MainActivity2", "Image saved and displayed: " + currentPhotoPath);
+            }
+
+        } catch (IOException e) {
+            Log.e("MainActivity2", "Error handling image: " + e.getMessage());
+            Toast.makeText(this, "Error saving image", Toast.LENGTH_SHORT).show();
+        }
     }
 }
