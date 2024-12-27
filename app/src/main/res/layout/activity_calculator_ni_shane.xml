@@ -28,7 +28,7 @@
 
     <Spinner
         android:id="@+id/budgetSpinner"
-        android:layout_width="120dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
         android:layout_marginTop="4dp"
         android:max="1000"
         android:progress="0"
-        android:progressTint="@color/teal"
+        android:progressTint="#1EE707"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
