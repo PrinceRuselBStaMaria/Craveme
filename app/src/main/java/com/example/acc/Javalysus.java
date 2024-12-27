@@ -3,13 +3,14 @@ package com.example.acc;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
+import android.widget.ArrayAdapter;     
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -127,6 +128,20 @@ public class Javalysus extends AppCompatActivity {
             Intent intent = new Intent(Javalysus.this, CalculatorNiShane.class);
             startActivity(intent);
         });
+
+        // Get budget from intent
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("budget")) {
+            budget = intent.getIntExtra("budget", 0);
+            updateBudgetDisplay();
+        }
+
+        // Load budget from SharedPreferences if not in intent
+        if (budget == 0) {
+            SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            budget = prefs.getInt("budget", 0);
+            updateBudgetDisplay();
+        }
     }
 
     // Update addItem method to handle editing
@@ -241,7 +256,20 @@ public class Javalysus extends AppCompatActivity {
     }
 
     private void updateBudgetDisplay() {
-        budgetTextView.setText(String.format("Budget: ₱%.2f", budget));
+        // Update budget TextView
+        budgetTextView.setText(String.format("Budget: ₱%d", (int)budget));
+
+        // Update budget when items are added/removed
+        double remainingBudget = budget - totalPrice;
+        budgetTextView.setText(String.format("Budget: ₱%d (Remaining: ₱%.2f)", 
+            (int)budget, remainingBudget));
+            
+        // Optional: Visual feedback if over budget
+        if (remainingBudget < 0) {
+            budgetTextView.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        } else {
+            budgetTextView.setTextColor(getResources().getColor(android.R.color.black));
+        }
     }
 
     private void showKeyboard(View view) {

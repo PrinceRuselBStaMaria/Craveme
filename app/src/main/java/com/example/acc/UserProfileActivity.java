@@ -59,45 +59,30 @@ public class UserProfileActivity extends AppCompatActivity {
         String name = prefs.getString("firstName", "Not set");
         String email = prefs.getString("email", "Not set");
         String imagePath = prefs.getString("profileImage", null);
-
         String username = prefs.getString("username", "Not set");
         String password = prefs.getString("password", "Not set");
         
-        Log.d("UserProfile", "Retrieved image path: " + imagePath);
+        Log.d("UserProfile", "Loading image from path: " + imagePath);
         
         nameText.setText("Name: " + name);
         emailText.setText("Email: " + email);
         passwordText.setText("Password: " + password);
         usernameText.setText("Username: " + username);
 
-        
-        if (imagePath != null && !imagePath.isEmpty()) {
+        if (imagePath != null) {
             File imageFile = new File(imagePath);
-            Log.d("UserProfile", "Image file exists: " + imageFile.exists());
-            
             if (imageFile.exists()) {
                 try {
                     Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
                     if (bitmap != null) {
                         profileImage.setImageBitmap(bitmap);
-                        profileImage.setVisibility(View.VISIBLE);
-                        Log.d("UserProfile", "Image loaded successfully");
-                    } else {
-                        Log.e("UserProfile", "Failed to decode bitmap");
-                        profileImage.setVisibility(View.GONE);
+                        Log.d("UserProfile", "Loaded image from: " + imagePath);
                     }
                 } catch (Exception e) {
-                    Log.e("UserProfile", "Error loading image: " + e.getMessage());
-                    e.printStackTrace();
-                    profileImage.setVisibility(View.GONE);
+                    Log.e("UserProfile", "Error loading image", e);
+                    profileImage.setImageResource(R.drawable.devtry);
                 }
-            } else {
-                Log.e("UserProfile", "Image file does not exist");
-                profileImage.setVisibility(View.GONE);
             }
-        } else {
-            Log.d("UserProfile", "No image path found");
-            profileImage.setVisibility(View.GONE);
         }
     }
 

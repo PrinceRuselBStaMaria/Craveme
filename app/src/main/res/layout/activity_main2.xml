@@ -148,6 +148,13 @@
             android:adjustViewBounds="true"
             android:visibility="gone" />
 
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"/>
+
         <!-- Profile Picture Upload Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
