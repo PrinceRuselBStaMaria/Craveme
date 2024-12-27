@@ -319,6 +319,9 @@ public class MainActivity2 extends AppCompatActivity {
             Log.d("MainActivity2", "Saving image path: " + currentPhotoPath);
         }
 
+        // Save birthday
+        editor.putString("birthday", dateEdt.getText().toString());
+        
         editor.apply();
     }
 
@@ -359,7 +362,7 @@ public class MainActivity2 extends AppCompatActivity {
             }
 
         } catch (IOException e) {
-            Log.e("MainActivity2", "Error handling image: " + e.getMessage());
+            Log.e("MainActivity 2", "Error handling image: " + e.getMessage());
             Toast.makeText(this, "Error saving image", Toast.LENGTH_SHORT).show();
         }
     }
