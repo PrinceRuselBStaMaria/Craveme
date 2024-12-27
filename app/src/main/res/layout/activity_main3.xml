@@ -6,8 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@drawable/yey"
     tools:context=".MainActivity3"
     tools:layout_editor_absoluteX="7dp"
+
     tools:layout_editor_absoluteY="1dp">
 
     <androidx.constraintlayout.widget.Guideline
@@ -22,6 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="264dp"
         android:text="Welcome"
+        android:background="@drawable/rounded_background"
+        android:elevation="8dp"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -34,6 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Full Name"
+        android:background="@drawable/rounded_background"
+        android:elevation="8dp"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
